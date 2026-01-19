@@ -5,13 +5,13 @@ import plotly.express as px
 import numpy as np
 from datetime import datetime, timedelta
 
-# ===============================
+
 # Load model and dataset
 # ===============================
 model = joblib.load('random_forest_order_total.pkl')
 data = pd.read_csv('order_history_kaggle_data.csv')
 
-# ===============================
+
 # Preprocessing
 # ===============================
 data['order_placed_datetime'] = pd.to_datetime(data['Order Placed At'], errors='coerce')
@@ -31,12 +31,12 @@ np.random.seed(42)
 data['lat'] = 28.6 + np.random.randn(len(data))*0.05
 data['lon'] = 77.2 + np.random.randn(len(data))*0.05
 
-# ===============================
+
 # App configuration
 # ===============================
 st.set_page_config(page_title="Restaurant Dashboard", layout="wide")
 
-# ===============================
+
 # CSS Styling
 # ===============================
 st.markdown("""
@@ -88,28 +88,28 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ===============================
+
 # Dashboard Header
 # ===============================
-st.markdown(f"<h1 style='text-align:center;'>🍽️ Restaurant Dashboard & Order Prediction</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align:center;'>🍽️ Restaurant Analytics Dashboard</h1>", unsafe_allow_html=True)
 st.markdown(f"<p style='text-align:center;'> Designed to simulate how analytics teams support pricing, operations, and growth decisions in food delivery platforms.</p> ", unsafe_allow_html=True)
 st.markdown(f"<p style='text-align:center;'>Interactive professional dashboard with analytics, map, and AI predictions</p>", unsafe_allow_html=True)
 st.markdown("""
 ### 🎯 Business Context & Objective
 
-This dashboard is designed as a **decision-support tool for food delivery operations**.
-The objective is to help stakeholders **monitor revenue performance, understand customer behavior, 
-and evaluate operational factors that influence order value**.
+This dashboard simulates how analytics teams support operational, pricing, and growth decisions 
+in food delivery platforms. 
 
-As an MBA (Final Year) student specializing in analytics, this project demonstrates how 
-**data-driven insights and machine learning can support pricing, delivery efficiency, 
-and restaurant performance evaluation** in a real-world food delivery ecosystem.
+It demonstrates how **data-driven insights and machine learning** can help monitor revenue, 
+optimize operations, and evaluate restaurant performance.
 """)
 
-# ===============================
+
+
 # Sidebar Filters
 # ===============================
 st.sidebar.markdown("## 🔎 Filters & Prediction Inputs")
+st.sidebar.caption("Use filters to explore operational scenarios and update KPIs in real time.")
 
 # City Filter
 st.sidebar.markdown('<div class="filter-card">', unsafe_allow_html=True)
@@ -199,7 +199,7 @@ This approach reflects common practices in **exploratory business analytics and 
 st.markdown(""" Operational time variables used in predictive inputs are modeled features derived for analytical demonstration and may not represent exact system-tracked timestamps.
 """)
 
-# ===============================
+
 # KPI Metrics
 # ===============================
 st.markdown("### 📈 Key Performance Indicators")
@@ -257,7 +257,7 @@ st.markdown("""
 • Apply scenario-based predictions to evaluate the financial impact of promotional strategies before execution.
 """)
 
-# ===============================
+
 # Dashboard Insights (Charts & Map)
 # ===============================
 st.markdown("### 📊 Dashboard Insights")
@@ -314,6 +314,7 @@ fig_map = px.scatter_mapbox(
 )
 fig_map.update_layout(mapbox_style="carto-positron", margin={"r":0,"t":0,"l":0,"b":0})
 st.plotly_chart(fig_map, use_container_width=True)
+st.caption("📍 Location data is synthetic and used only for visualization.")
 
 # Revenue by Subzone Chart (Professional)
 if 'Subzone' in filtered_data.columns and not filtered_data.empty:
@@ -338,7 +339,7 @@ if 'Subzone' in filtered_data.columns and not filtered_data.empty:
     )
     st.plotly_chart(fig_subzone, use_container_width=True)
 
-# ===============================
+
 # Restaurant Insights
 # ===============================
 st.markdown("### 🏷️ Restaurant Insights")
@@ -358,16 +359,19 @@ st.plotly_chart(fig_rest, use_container_width=True)
 st.markdown("""
 ### 🤖 Predictive Analytics Overview
 
-A **Random Forest regression model** is used to estimate the expected order value
-based on operational and order-related inputs such as item count, discount, 
-kitchen preparation time, rider wait time, and delivery delay.
+A **Random Forest regression model** is used to estimate expected order value
+based on order composition and operational indicators such as:
 
-The model captures **non-linear relationships** commonly observed in food delivery operations 
-and is intended to support **scenario analysis and revenue estimation**, 
-rather than exact financial forecasting.
+- Number of items in the order  
+- Total discount applied  
+- Kitchen preparation time (KPT)
+
+The model is designed for **scenario testing and business insight generation**, 
+not exact financial forecasting.
 """)
 
-# ===============================
+
+
 # Predict Order Total
 # ===============================
 st.markdown("### 🤖 Predict Order Total")
@@ -391,7 +395,7 @@ Predictions are based on historical patterns and may vary under changing operati
 The output should be used as a **supporting estimate**, not a final decision metric.
 """)
 
-# ===============================
+
 # Mini AI Assistant (Professional Cards)
 # ===============================
 st.markdown("### 💬 Mini AI Assistant")
@@ -452,7 +456,7 @@ if user_query:
                 </div>
             """, unsafe_allow_html=True)
 
-# ===============================
+
 # Dataset Preview
 # ===============================
 st.markdown("### 📋 Preview Filtered Data")
