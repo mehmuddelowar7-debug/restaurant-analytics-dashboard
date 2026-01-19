@@ -121,16 +121,6 @@ city_filter = st.sidebar.multiselect(
 )
 st.sidebar.markdown('</div>', unsafe_allow_html=True)
 
-# Delivery Type Filter
-st.sidebar.markdown('<div class="filter-card">', unsafe_allow_html=True)
-st.sidebar.markdown("### 🚚 Delivery Type")
-delivery_filter = st.sidebar.multiselect(
-    "Select Delivery Types", 
-    options=sorted(data['Delivery'].dropna().unique()), 
-    default=sorted(data['Delivery'].dropna().unique())
-)
-st.sidebar.markdown('</div>', unsafe_allow_html=True)
-
 # Date Range Filter
 st.sidebar.markdown('<div class="filter-card">', unsafe_allow_html=True)
 st.sidebar.markdown("### 📅 Date Range")
@@ -188,7 +178,6 @@ if 'Subzone' in data.columns and not data['Subzone'].dropna().empty:
 # ===============================
 filtered_data = data[
     (data['City'].isin(city_filter)) &
-    (data['Delivery'].isin(delivery_filter)) &
     (data['order_placed_datetime'].dt.date >= start_date) &
     (data['order_placed_datetime'].dt.date <= end_date)
 ]
